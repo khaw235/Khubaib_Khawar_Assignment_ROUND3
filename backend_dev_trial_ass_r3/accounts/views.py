@@ -128,7 +128,6 @@ class UserAPI(generics.GenericAPIView):
         POST Object (a dictionary).
     """
 
-    permission_classes = [AllowAny]
     serializer_class = UserSerializer
 
     def get(self, request, id):
@@ -372,7 +371,7 @@ class UpdateSaleAPI(generics.GenericAPIView):
             return Response(data)
         
 
-    def patch(self, request, id):
+    def put(self, request, id):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         sale_data = serializer.validated_data
