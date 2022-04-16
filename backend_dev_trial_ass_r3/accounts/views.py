@@ -169,14 +169,16 @@ class CountriesAPI(generics.GenericAPIView):
 
     def get(self, request):
         countries = Country.objects.all()
-        full_data = []
-        data = {
+
+        rec = []
+
+        for country in countries:
+            data = {
             'id': 0,
             'name': 'n',
             'cities': []
-        }
+            }
 
-        for country in countries:
             data['id'] = country.id
             data['name'] = country.name
 
@@ -188,8 +190,12 @@ class CountriesAPI(generics.GenericAPIView):
                         'id': city.id,
                         'name': city.name
                         })
+
+            rec.append(data)
             
-        return Response(data)
+        full_data = {"COUNTRIES": rec}
+
+        return Response(full_data)
 
     def post():
         pass
